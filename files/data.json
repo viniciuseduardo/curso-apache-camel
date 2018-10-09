@@ -1,0 +1,20 @@
+{
+	"idCompra": 123,
+	"NomeComprador": "Marcelo Lima",
+	"identidade": 12345,
+	"items": [{
+			"itemId": 123,
+			"sigla": "BCK",
+			"descricao": "Bicicleta",
+			"preco": 125.00,
+			"quantidade": 1
+		},
+		{
+			"itemId": 222,
+			"sigla": "TDK",
+			"descricao": "Torradeira",
+			"preco": 15.00,
+			"quantidade": 3
+		}
+	]
+}

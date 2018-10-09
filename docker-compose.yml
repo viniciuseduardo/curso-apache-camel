@@ -1,0 +1,43 @@
+version: '3.2'
+services:
+  curso-amq:
+    image: rmohr/activemq:latest
+    ports:
+      - "61616:61616" #JMS
+      - "8161:8161" #UI
+      - "5672:5672" #AMQP
+    volumes:
+      - curso-amq-data:/mnt/data      
+    networks:
+      curso-network:
+        aliases:
+          - amq
+    environment:
+      DB_HOST: db
+      DB_USER: markel-dev
+      DB_NAME: markel-dev
+      DB_PASS: q1w2e3r4t5
+      QT_QPA_PLATFORM: offscreen
+  curso-db:
+    image: mysql/mysql-server:5.7
+    ports:
+      - "3306:3306"
+    volumes:
+      - curso-db-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_HOST: '%'      
+      MYSQL_ROOT_PASSWORD: q1w2e3r4t5
+      MYSQL_DATABASE: curso-camel
+      MYSQL_USER: curso-camel
+      MYSQL_PASSWORD: q1w2e3r4t5
+    networks:
+      curso-network:
+        aliases:
+          - database
+volumes:
+    curso-db-data:
+        driver: "local"
+    curso-amq-data:
+        driver: "local"        
+networks:
+  curso-network:
