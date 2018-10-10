@@ -8,9 +8,10 @@ import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.dataformat.JsonLibrary;
 import org.apache.log4j.Logger;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Component;
 
-import br.com.sysmi.treinamento.beans.Item;
+import br.com.sysmi.treinamento.beans.OrderItem;
 import br.com.sysmi.treinamento.beans.Order;
 
 @Component
@@ -36,13 +37,18 @@ public class OrderDatabaseRoute extends RouteBuilder {
 				public void process(Exchange exchange) throws Exception {
 					Order order = exchange.getIn().getBody(Order.class);	
 					
-					List<Item> cleanItens = order.getItems().stream().filter( item -> item.hasStock()).collect(Collectors.toList());
+					List<OrderItem> cleanItens = order.getItems().stream().filter( item -> item.hasStock()).collect(Collectors.toList());
 					Logger.getLogger(getClass()).info(cleanItens);
 					order.setItems(cleanItens);
 					exchange.getIn().setBody(order);
 				}
 			})
-			.log("Pedido tratado: \n ${body}")			
+			.log("Pedido tratado: \n ${body}")
+			.doTry()
+				.to("bean:orderDAO?method=insertOrder")
+			.doCatch(DuplicateKeyException.class)
+				.log("Pedido já cadastrado.")
+			.end()
 		.end();
 	}
 

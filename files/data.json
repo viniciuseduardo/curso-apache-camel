@@ -11,10 +11,17 @@
 		},
 		{
 			"itemId": 222,
-			"sigla": "TDK",
+			"sigla": "BCK",
 			"descricao": "Torradeira",
 			"preco": 15.00,
 			"quantidade": 3
+		},
+		{
+			"itemId": 456,
+			"sigla": "BCK",
+			"descricao": "Microondas",
+			"preco": 129.98,
+			"quantidade": 2
 		}
 	]
 }

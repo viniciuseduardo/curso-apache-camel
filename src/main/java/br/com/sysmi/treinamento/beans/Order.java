@@ -27,7 +27,7 @@ public class Order {
 	@JsonProperty("identidade")
 	private Integer identidade;
 	@JsonProperty("items")
-	private List<Item> items = null;
+	private List<OrderItem> items = null;
 	@JsonIgnore
 	private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -62,12 +62,12 @@ public class Order {
 	}
 
 	@JsonProperty("items")
-	public List<Item> getItems() {
+	public List<OrderItem> getItems() {
 		return items;
 	}
 
 	@JsonProperty("items")
-	public void setItems(List<Item> items) {
+	public void setItems(List<OrderItem> items) {
 		this.items = items;
 	}
 
@@ -90,9 +90,9 @@ public class Order {
 	
 	@JsonIgnore
     public boolean checkLimitItems(Integer totalItems) {
-		Logger.getLogger(getClass()).info("Checando limite de itens. Total de Itens: " + totalItems);
+		Logger.getLogger(getClass()).info("Checando limite de itens. Total de Itens: " + totalItems + " - Limite: " + LIMIT_ITEMS);
 
-        return totalItems >= LIMIT_ITEMS;
+        return totalItems > LIMIT_ITEMS;
     }
 
 }
