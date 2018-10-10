@@ -48,7 +48,9 @@ public class OrderDatabaseRoute extends RouteBuilder {
 				.to("bean:orderDAO?method=insertOrder")
 			.doCatch(DuplicateKeyException.class)
 				.log("Pedido já cadastrado.")
+				.stop()
 			.end()
+			.log("Pedido cadastrado com sucesso.")
 		.end();
 	}
 
