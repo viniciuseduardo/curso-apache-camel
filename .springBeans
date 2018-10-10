@@ -7,7 +7,7 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-		<config>java:br.com.sysmi.treinamento.Application</config>
+		<config>java:br.com.sysmi.treinamento.TreinamentoCamelApplication</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>
