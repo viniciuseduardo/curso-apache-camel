@@ -1,7 +1,0 @@
-/home/vinicius/Projetos/curso-apache-camel/src/main/java/br/com/sysmi/treinamento/dao/OrderDAO.java
-/home/vinicius/Projetos/curso-apache-camel/src/main/java/br/com/sysmi/treinamento/beans/Item.java
-/home/vinicius/Projetos/curso-apache-camel/src/main/java/br/com/sysmi/treinamento/TreinamentoCamelApplication.java
-/home/vinicius/Projetos/curso-apache-camel/src/main/java/br/com/sysmi/treinamento/beans/Order.java
-/home/vinicius/Projetos/curso-apache-camel/src/main/java/br/com/sysmi/treinamento/routes/OrderDatabaseRoute.java
-/home/vinicius/Projetos/curso-apache-camel/src/main/java/br/com/sysmi/treinamento/TreinamentoCamelConfiguration.java
-/home/vinicius/Projetos/curso-apache-camel/src/main/java/br/com/sysmi/treinamento/routes/OrderFileRoute.java
