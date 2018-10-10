@@ -16,16 +16,18 @@ import br.com.sysmi.treinamento.beans.Order;
 
 @Component
 public class OrderDatabaseRoute extends RouteBuilder {
-	public static final String ID = "sql-processor";
-	public static final String URI = "seda:" + ID;
+	public static final String ID_INSERT = "sql-insert-order";
+	public static final String URI_INSERT = "seda:" + ID_INSERT;
+	public static final String ID_FIND = "sql-find-order";
+	public static final String URI_FIND = "seda:" + ID_FIND;	
 	
 
 	@Override
 	public void configure() throws Exception {
 
-		from(URI)
-			.routeId(ID)
-			.routeDescription("Rota de Processamento da Compra")
+		from(URI_INSERT)
+			.routeId(ID_INSERT)
+			.routeDescription("Rota de Processamento da Compra -  Inserção de Pedido")
 			.log("Recebendo pedido de salvamento")
 			.unmarshal().json(JsonLibrary.Jackson, Order.class)
 		    .filter().method(Order.class, "checkLimitItems(${body.items.size})")
@@ -51,6 +53,11 @@ public class OrderDatabaseRoute extends RouteBuilder {
 				.stop()
 			.end()
 			.log("Pedido cadastrado com sucesso.")
+		.end();
+		
+		from(URI_FIND)
+			.routeId(ID_FIND)
+			.routeDescription("Rota de Consulta de Compra")
 		.end();
 	}
 
