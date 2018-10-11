@@ -18,7 +18,7 @@ public class OrderFileRoute extends RouteBuilder {
 			.from("file:./files?fileName=Order.json&delete=true")
 			.log("Lendo arquivo de pedido...")
 			.log("Detalhes de Compra: \n ${body}")
-			.to(OrderDatabaseRoute.URI)
+			.to(OrderDatabaseRoute.URI_INSERT_ORDER)
 		.end();
 	}
 

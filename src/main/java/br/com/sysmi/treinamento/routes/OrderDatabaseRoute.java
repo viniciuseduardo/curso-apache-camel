@@ -1,5 +1,6 @@
 package br.com.sysmi.treinamento.routes;
 
+import java.sql.SQLRecoverableException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -16,17 +17,17 @@ import br.com.sysmi.treinamento.beans.Order;
 
 @Component
 public class OrderDatabaseRoute extends RouteBuilder {
-	public static final String ID_INSERT = "sql-insert-order";
-	public static final String URI_INSERT = "seda:" + ID_INSERT;
-	public static final String ID_FIND = "sql-find-order";
-	public static final String URI_FIND = "seda:" + ID_FIND;	
+	public static final String ID_INSERT_ORDER = "sql-insert-order";
+	public static final String URI_INSERT_ORDER = "seda:" + ID_INSERT_ORDER;
+	public static final String ID_SHOW_ORDER = "sql-show-order";
+	public static final String URI_SHOW_ORDER = "seda:" + ID_SHOW_ORDER;	
 	
 
 	@Override
 	public void configure() throws Exception {
 
-		from(URI_INSERT)
-			.routeId(ID_INSERT)
+		from(URI_INSERT_ORDER)
+			.routeId(ID_INSERT_ORDER)
 			.routeDescription("Rota de Processamento da Compra -  Inserção de Pedido")
 			.log("Recebendo pedido de salvamento")
 			.unmarshal().json(JsonLibrary.Jackson, Order.class)
@@ -55,9 +56,14 @@ public class OrderDatabaseRoute extends RouteBuilder {
 			.log("Pedido cadastrado com sucesso.")
 		.end();
 		
-		from(URI_FIND)
-			.routeId(ID_FIND)
+		from(URI_SHOW_ORDER)
+			.routeId(ID_SHOW_ORDER)
 			.routeDescription("Rota de Consulta de Compra")
+			.doTry()
+				.to("bean:orderDAO?method=showOrder(${headers.id})")
+				.log("Retrieved successfully.")
+			.doCatch(SQLRecoverableException.class)
+				.setHeader("statusDB", simple("Unavailable"))		
 		.end();
 	}
 
