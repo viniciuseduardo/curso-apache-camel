@@ -10,6 +10,7 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.model.dataformat.JsonLibrary;
 import org.apache.log4j.Logger;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
 
 import br.com.sysmi.treinamento.beans.OrderItem;
@@ -62,8 +63,8 @@ public class OrderDatabaseRoute extends RouteBuilder {
 			.doTry()
 				.to("bean:orderDAO?method=showOrder(${headers.id})")
 				.log("Retrieved successfully.")
-			.doCatch(SQLRecoverableException.class)
-				.setHeader("statusDB", simple("Unavailable"))		
+			.doCatch(EmptyResultDataAccessException.class)
+				.setBody(simple(null))	
 		.end();
 	}
 

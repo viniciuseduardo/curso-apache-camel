@@ -1,9 +1,13 @@
 package br.com.sysmi.treinamento;
 
+import javax.jms.ConnectionFactory;
 import javax.sql.DataSource;
 
+import org.apache.activemq.jms.pool.PooledConnectionFactory;
+import org.apache.activemq.spring.ActiveMQConnectionFactory;
 import org.apache.camel.component.servlet.CamelHttpTransportServlet;
 import org.apache.camel.http.common.CamelServlet;
+import org.apache.qpid.jms.JmsConnectionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
@@ -39,5 +43,12 @@ public class TreinamentoCamelConfiguration {
 		final ServletRegistrationBean servlet = new ServletRegistrationBean(new CamelHttpTransportServlet(), "/treinamento-camel/*");
 		servlet.setName(CamelServlet.class.getSimpleName());
 		return servlet;
+	}
+	
+	@Bean(name = "jmsConnectionFactoryOrder")
+	public ConnectionFactory jmsConnectionFactory() {
+		final PooledConnectionFactory pool = new PooledConnectionFactory();
+		pool.setConnectionFactory(new ActiveMQConnectionFactory());
+		return pool;
 	}	
 }

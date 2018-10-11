@@ -27,7 +27,7 @@ public class OrderDAO {
 	
 	private static final String VALUES = "VALUES";
 	private static final String INSERT_ORDER = "INSERT INTO `curso-camel`.`order`(`idCompra`, `nomeComprador`, `identidade`) ";
-	private static final String INSERT_ORDER_ITEM = "INSERT INTO `curso-camel`.`order_items`(`order_id`, `item_id`, `sigle`, `description`, `price`, `quantity`) ";
+	private static final String INSERT_ORDER_ITEM = "INSERT INTO `curso-camel`.`order_items`(`order_id`, `itemId`, `sigla`, `descricao`, `preco`, `quantidade`) ";
 	private static final String SELECT_ORDER = "SELECT * FROM `order` WHERE `idCompra` = ?";
 	private static final String SELECT_ORDER_ITEM = "SELECT * FROM `order_items` WHERE `order_id` = ?";
 	

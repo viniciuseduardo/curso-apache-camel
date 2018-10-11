@@ -13,11 +13,10 @@ public class OrderFileRoute extends RouteBuilder {
 		
 		from(URI)
 			.routeId(ID)
-			.routeDescription("Lê os arquivos de pedidos")			
-			.log("Lendo arquivo de pedidos")
+			.routeDescription("Read Order Files")	
 			.from("file:./files?fileName=Order.json&delete=true")
-			.log("Lendo arquivo de pedido...")
-			.log("Detalhes de Compra: \n ${body}")
+			.log("Reading order file...")
+			.log("Order Details: \n ${body}")
 			.to(OrderDatabaseRoute.URI_INSERT_ORDER)
 		.end();
 	}
