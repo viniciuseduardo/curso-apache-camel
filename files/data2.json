@@ -1,0 +1,34 @@
+{
+	"idCompra": 125,
+	"NomeComprador": "Vinicius Alves",
+	"identidade":23446546,
+	"items": [{
+			"itemId": 1,
+			"sigla": "BCK",
+			"descricao": "Fone",
+			"preco": 199.90,
+			"quantidade": 1
+		},
+		{
+			"itemId": 2,
+			"sigla": "BCK",
+			"descricao": "Carregador",
+			"preco": 79.89,
+			"quantidade": 1
+		},
+		{
+			"itemId": 3,
+			"sigla": "BCK",
+			"descricao": "Capa",
+			"preco": 14.69,
+			"quantidade": 1
+		},
+		{
+			"itemId": 4,
+			"sigla": "BCK",
+			"descricao": "Suporte",
+			"preco": 39.00,
+			"quantidade": 1
+		}		
+	]
+}
