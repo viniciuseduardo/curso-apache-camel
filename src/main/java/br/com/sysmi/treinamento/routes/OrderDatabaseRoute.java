@@ -4,6 +4,8 @@ import java.sql.SQLRecoverableException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 import org.apache.camel.builder.RouteBuilder;
@@ -64,7 +66,7 @@ public class OrderDatabaseRoute extends RouteBuilder {
 				.to("bean:orderDAO?method=showOrder(${headers.id})")
 				.log("Retrieved successfully.")
 			.doCatch(EmptyResultDataAccessException.class)
-				.setBody(simple(null))	
+				.setHeader(Exchange.HTTP_RESPONSE_CODE, constant(HttpServletResponse.SC_NOT_FOUND))	
 		.end();
 	}
 

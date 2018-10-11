@@ -39,12 +39,7 @@ public class OrderRestRouteBuilder extends RouteBuilder {
 				.route().routeId("get-order")
 		            .log("Searching order ID = ${headers.id}...")
 		            .to(OrderDatabaseRoute.URI_SHOW_ORDER)
-		            .choice()
-		            	.when(body().isNull())
-		            		.setHeader(Exchange.HTTP_RESPONSE_CODE, constant(HttpServletResponse.SC_NOT_FOUND))
-						.otherwise()
-							.setHeader(Exchange.HTTP_RESPONSE_CODE, constant(HttpServletResponse.SC_OK))
-					.endChoice()
+		            .log("${body}")
 				.end();
     }
 }
